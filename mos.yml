@@ -1,0 +1,26 @@
+author: Pim van Pelt <pim@google.com>
+type: lib
+description: Mongoose OS library for INA219
+version: 1.0
+platforms: [esp8266, esp32]
+
+sources:
+  - src
+
+includes:
+  - include
+
+config_schema:
+  - ["ina219", "o", {title: "INA219 settings"}]
+  - ["ina219.i2caddr", "i", 0x40, {title: "I2C Address"}]
+
+libs:
+  - origin: https://github.com/mongoose-os-libs/i2c
+
+tags:
+  - c
+  - i2c
+  - hw
+  - docs:drivers:INA219 I2C
+
+manifest_version: 2017-09-29
