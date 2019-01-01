@@ -6,8 +6,9 @@ A Mongoose library for Texas Instruments' popular I2C current sensor.
 
 The `INA219` is a simple I2C device that measures a voltage drop over a
 shunt resistor, as well as the voltage on the bus. It is able to measure
-voltage up to 32V on the bus and the voltage drop over the shunt resistor
-in 10uV increments with a range of 320mV, and is quite precise.
+voltage up to 26V (in 4mV increments) on the bus and the voltage drop over
+the shunt resistor in 10uV increments with a range of 320mV, and is
+reasonably precise.
 
 Using a 0.1Ohm shunt resistor, the maximum current that can be measured
 is 3.2A.
