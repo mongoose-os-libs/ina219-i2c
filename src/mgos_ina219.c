@@ -124,7 +124,7 @@ bool mgos_ina219_get_shunt_voltage(struct mgos_ina219 *sensor, float *volts) {
     return false;
   }
   // LOG(LL_DEBUG, ("Vshunt = %d", val));
-  *volts = (float)val / 1e6;   // value of 32000 is 0.320V
+  *volts = (float)val / 1e5;   // value of 32000 is 0.320V
   return true;
 }
 
