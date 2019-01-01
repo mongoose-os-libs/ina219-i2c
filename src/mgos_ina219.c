@@ -97,7 +97,6 @@ void mgos_ina219_destroy(struct mgos_ina219 **sensor) {
 
 bool mgos_ina219_get_bus_voltage(struct mgos_ina219 *sensor, float *volts) {
   int16_t val;
-  bool    ovf, cnvr;
 
   if (!sensor || !volts) {
     return false;
@@ -106,10 +105,10 @@ bool mgos_ina219_get_bus_voltage(struct mgos_ina219 *sensor, float *volts) {
   if (val == -1) {
     return false;
   }
-  ovf  = (val & 0x01);
-  cnvr = (val & 0x02);
-  LOG(LL_DEBUG, ("Vbus = %d %s%s", val, ovf ? "overflow " : "", cnvr ? "new" : "stale"));
-  *volts  = val >> 3;   // first 3 bits are not used
+  // ovf  = (val & 0x01);
+  // cnvr = (val & 0x02);
+  // LOG(LL_DEBUG, ("Vbus = %d %s%s", val, ovf ? "overflow " : "", cnvr ? "new" : "stale"));
+  *volts  = val / 8;   // first 3 bits are not used
   *volts *= 0.004f;     // 4mV per LSB
   return true;
 }
@@ -124,8 +123,8 @@ bool mgos_ina219_get_shunt_voltage(struct mgos_ina219 *sensor, float *volts) {
   if (val == -1) {
     return false;
   }
-  LOG(LL_DEBUG, ("Vshunt = %d", val));
-  *volts = val / 100;   // register is in centivolts (value of 32000 is 320.00).
+  // LOG(LL_DEBUG, ("Vshunt = %d", val));
+  *volts = (float)val / 1e6;   // value of 32000 is 0.320V
   return true;
 }
 
@@ -139,7 +138,7 @@ bool mgos_ina219_get_current(struct mgos_ina219 *sensor, float *ampere) {
     return false;
   }
   *ampere = shunt_volts / sensor->shunt_resistance;
-  LOG(LL_DEBUG, ("Rshunt=%.2fOhms, Vshunt=%.3fV, Ishunt=%.3fA", sensor->shunt_resistance, shunt_volts, *ampere));
+  // LOG(LL_DEBUG, ("Rshunt=%.2fOhms, Vshunt=%.3fV, Ishunt=%.3fA", sensor->shunt_resistance, shunt_volts, *ampere));
   return false;
 }
 
