@@ -139,7 +139,7 @@ bool mgos_ina219_get_current(struct mgos_ina219 *sensor, float *ampere) {
   }
   *ampere = shunt_volts / sensor->shunt_resistance;
   // LOG(LL_DEBUG, ("Rshunt=%.2fOhms, Vshunt=%.3fV, Ishunt=%.3fA", sensor->shunt_resistance, shunt_volts, *ampere));
-  return false;
+  return true;
 }
 
 bool mgos_ina219_set_shunt_resistance(struct mgos_ina219 *sensor, float ohms) {
